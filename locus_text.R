@@ -5,11 +5,10 @@ library("RColorBrewer")
 library("e1071")
 
 # Load the data as a corpus
-#tmp<-"C:/Users/ankitccuser/Documents/text/poetry works"
-poetry <- VCorpus(DirSource("C:/Users/ankitccuser/Documents/text/poetry works",encoding = "UTF-8"))
 
-tmp<-"C:/Users/ankitccuser/Documents/text/porse.txt"
+poetry <- VCorpus(DirSource("C:/Users/ankitccuser/Documents/text/poetry works",encoding = "UTF-8"))
 porse <- VCorpus(DirSource("C:/Users/ankitccuser/Documents/text/prose",encoding = "UTF-8"))
+
 
 corp<-text_cleaning()
 
@@ -67,4 +66,4 @@ test<-trainset[-indexes,]
 model<-naiveBayes(as.matrix(subset(train,select = -c(class))),as.factor(train$class))
 
 
-predict(model,as.matrix(subset(test,select=-c(class))))
+result<-predict(model,as.matrix(subset(test,select=-c(class))))
