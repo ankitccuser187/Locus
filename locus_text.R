@@ -1,7 +1,8 @@
 library("tm")
 library("SnowballC")
-#library("wordcloud")
-library("RColorBrewer")
+library("ggplot2")
+library("lattice")
+library("caret")
 library("e1071")
 
 # Load the data as a corpus
@@ -67,3 +68,6 @@ model<-naiveBayes(as.matrix(subset(train,select = -c(class))),as.factor(train$cl
 
 
 result<-predict(model,as.matrix(subset(test,select=-c(class))))
+
+#now we we will get confussion matrix on the performance of classifier
+confusionMatrix(result,test$class)
