@@ -1,8 +1,5 @@
-library("tm")
-library("SnowballC")
-library("wordcloud")
-library("RColorBrewer")
-library("NLP")
+
+
 
 text_cleaning<-function(){
   corp_list<-list(poetry,porse)

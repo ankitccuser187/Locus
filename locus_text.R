@@ -1,7 +1,5 @@
 library("tm")
 library("SnowballC")
-library("ggplot2")
-library("lattice")
 library("caret")
 library("e1071")
 
@@ -10,7 +8,8 @@ library("e1071")
 poetry <- VCorpus(DirSource("C:/Users/ankitccuser/Documents/text/poetry works",encoding = "UTF-8"))
 porse <- VCorpus(DirSource("C:/Users/ankitccuser/Documents/text/prose",encoding = "UTF-8"))
 
-
+#run the text cleaning script
+source('~/text/tex_cleaning.R')
 corp<-text_cleaning()
 
 #matrix to generate how many times word ocurred in a document
@@ -64,10 +63,14 @@ train<-trainset[indexes,]
 test<-trainset[-indexes,]
 
 #now train the model for naive bayes classification
-model<-naiveBayes(as.matrix(subset(train,select = -c(class))),as.factor(train$class))
+model_naive<-naiveBayes(as.matrix(subset(train,select = -c(class))),as.factor(train$class))
 
 
-result<-predict(model,as.matrix(subset(test,select=-c(class))))
+#print(model_naive)
 
-#now we we will get confussion matrix on the performance of classifier
-confusionMatrix(result,test$class)
+result<-predict(model_naive,as.matrix(subset(test,select=-c(class))))
+
+#print(result)
+
+#now we we will get confussion matrix on the performance of classifie
+confusionMatrix(result,as.factor(test$class),dnn = c("prediction","references"))
